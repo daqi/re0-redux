@@ -3,12 +3,10 @@ export default function logger(createStore) {
     const store = createStore(...args);
     const { getState, dispatch } = store;
     const nextDispatch = (action) => {
-      const logArr = [];
-      logArr.push("prev state: ", getState(), "\n");
-      logArr.push("action: ", action, "\n");
+      console.log("prev state: ", getState());
+      console.log("action: ", action);
       const res = dispatch(action);
-      logArr.push("next state: ", getState(), "\n");
-      console.log("enhancer logger", "\n", ...logArr);
+      console.log("next state: ", getState());
       return res;
     };
     return {
