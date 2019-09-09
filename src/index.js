@@ -1,6 +1,8 @@
 import { createStore, compose, applyMiddleware } from "./re0-redux";
 import loggerMiddleware from "./middleware/logger";
 import loggerMiddleware2 from "./middleware/logger2";
+import loggerEnhancer from "./enhancer/logger";
+import loggerEnhancer2 from "./enhancer/logger2";
 
 function reducer(state = 0, action) {
   switch (action.type) {
@@ -13,9 +15,10 @@ function reducer(state = 0, action) {
   }
 }
 
-const createStoreWithMiddleware = applyMiddleware(
-  loggerMiddleware,
-  loggerMiddleware2
+const createStoreWithMiddleware = compose(
+  applyMiddleware(loggerMiddleware, loggerMiddleware2),
+  loggerEnhancer,
+  loggerEnhancer2
 )(createStore);
 
 const store = createStoreWithMiddleware(reducer, 100);
