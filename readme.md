@@ -174,4 +174,5 @@ store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100
 ```
 
-源码：https://github.com/daqi/re0-redux
+源码：https://github.com/daqi/re0-redux  
+redux源码：https://github.com/reduxjs/redux/tree/9c8e440964
