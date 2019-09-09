@@ -1,4 +1,6 @@
-import { createStore } from "./re0-redux";
+import { createStore, compose } from "./re0-redux";
+import logger from "./enhancer/logger";
+import logger2 from "./enhancer/logger2";
 
 function reducer(state = 0, action) {
   switch (action.type) {
@@ -11,26 +13,12 @@ function reducer(state = 0, action) {
   }
 }
 
-function nextReducer(state = 0, action) {
-  switch (action.type) {
-    case "INCREMENT":
-      return state + 100;
-    case "DECREMENT":
-      return state - 100;
-    default:
-      return state;
-  }
-}
+const createStoreWithEnhancer = compose(
+  logger2,
+  logger
+)(createStore);
 
-const store = createStore(reducer, 100);
-
-store.subscribe(function() {
-  console.log(store.getState());
-});
+const store = createStoreWithEnhancer(reducer, 100);
 
 store.dispatch({ type: "INCREMENT" }); // 101
-store.dispatch({ type: "DECREMENT" }); // 100
-
-store.replaceReducer(nextReducer);
-store.dispatch({ type: "INCREMENT" }); // 200
 store.dispatch({ type: "DECREMENT" }); // 100
