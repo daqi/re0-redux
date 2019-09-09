@@ -1,6 +1,6 @@
-import { createStore, compose } from "./re0-redux";
-import logger from "./enhancer/logger";
-import logger2 from "./enhancer/logger2";
+import { createStore, compose, applyMiddleware } from "./re0-redux";
+import loggerMiddleware from "./middleware/logger";
+import loggerMiddleware2 from "./middleware/logger2";
 
 function reducer(state = 0, action) {
   switch (action.type) {
@@ -13,12 +13,12 @@ function reducer(state = 0, action) {
   }
 }
 
-const createStoreWithEnhancer = compose(
-  logger2,
-  logger
+const createStoreWithMiddleware = applyMiddleware(
+  loggerMiddleware,
+  loggerMiddleware2
 )(createStore);
 
-const store = createStoreWithEnhancer(reducer, 100);
+const store = createStoreWithMiddleware(reducer, 100);
 
 store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100
