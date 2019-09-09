@@ -162,16 +162,16 @@ function reducer(state = 0, action) {
   }
 }
 
-const store = createStore(
-  reducer,
-  100,
-  compose(
-    applyMiddleware(loggerMiddleware, loggerMiddleware2),
-    loggerEnhancer,
-    loggerEnhancer2
-  )
+const finalEnhancer = compose(
+  applyMiddleware(loggerMiddleware, loggerMiddleware2),
+  loggerEnhancer,
+  loggerEnhancer2
 );
+
+const store = createStore(reducer, 100, finalEnhancer);
 
 store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100
 ```
+
+源码：https://github.com/daqi/re0-redux
