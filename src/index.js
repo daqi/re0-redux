@@ -15,13 +15,13 @@ function reducer(state = 0, action) {
   }
 }
 
-const createStoreWithMiddleware = compose(
+const finalEnhancer = compose(
   applyMiddleware(loggerMiddleware, loggerMiddleware2),
   loggerEnhancer,
   loggerEnhancer2
-)(createStore);
+);
 
-const store = createStoreWithMiddleware(reducer, 100);
+const store = createStore(reducer, 100, finalEnhancer);
 
 store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100

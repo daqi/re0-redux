@@ -1,7 +1,11 @@
-export default function createStore(reducer, preloadedState) {
+export default function createStore(reducer, preloadedState, enhancer) {
   let currentState = preloadedState;
   let currentReducer = reducer;
   let currentListeners = [];
+
+  if (enhancer) {
+    enhancer(createStore)(reducer, preloadedState);
+  }
 
   function getState() {
     return currentState;
@@ -14,7 +18,7 @@ export default function createStore(reducer, preloadedState) {
   }
 
   function replaceReducer(nextReducer) {
-    currentReducer = nextReducer
+    currentReducer = nextReducer;
     dispatch({ type: "replace" });
   }
 
