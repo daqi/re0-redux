@@ -11,12 +11,26 @@ function reducer(state = 0, action) {
   }
 }
 
-const store = createStore(reducer);
+function nextReducer(state = 0, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 100;
+    case "DECREMENT":
+      return state - 100;
+    default:
+      return state;
+  }
+}
 
-console.log(store.getState()); // 0
+const store = createStore(reducer, 100);
 
-store.dispatch({ type: "INCREMENT" });
-console.log(store.getState()); // 1
+store.subscribe(function() {
+  console.log(store.getState());
+});
 
-store.dispatch({ type: "DECREMENT" });
-console.log(store.getState()); // 0
+store.dispatch({ type: "INCREMENT" }); // 101
+store.dispatch({ type: "DECREMENT" }); // 100
+
+store.replaceReducer(nextReducer);
+store.dispatch({ type: "INCREMENT" }); // 200
+store.dispatch({ type: "DECREMENT" }); // 100
