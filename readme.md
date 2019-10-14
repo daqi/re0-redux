@@ -1,4 +1,11 @@
+---
+marp: true
+---
+
+
 # 从零开始实现 redux
+
+---
 
 ## 零 · 开发环境搭建
 
@@ -12,12 +19,14 @@ echo 'console.log("init");' > ./src/index.js
 code .
 webpack && node ./dist/main
 ```
+---
 
 ## 第一步实现
 
 - `createStore(reducer)`
 - `store.dispatch(action)`
 - `store.getState()`
+---
 
 ```js
 import { createStore } from "./re0-redux";
@@ -44,11 +53,15 @@ store.dispatch({ type: "DECREMENT" });
 console.log(store.getState()); // 0
 ```
 
+---
+
 ## 第二步实现
 
 - `createStore(reducer, preloadedState)`
 - `store.subscribe(listener)`
 - `store.replaceReducer(nextReducer)`
+
+---
 
 ```js
 import { createStore } from "./re0-redux";
@@ -89,10 +102,14 @@ store.dispatch({ type: "INCREMENT" }); // 200
 store.dispatch({ type: "DECREMENT" }); // 100
 ```
 
+---
+
 ## 第三步实现
 
 - `enhancer: logger`
 - `compose`
+
+---
 
 ```js
 import { createStore, compose } from "./re0-redux";
@@ -121,10 +138,14 @@ store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100
 ```
 
+---
+
 ## 第四步实现
 
 - `applyMiddleware`
 - `middleware: logger`
+
+---
 
 ```js
 import { createStore, compose, applyMiddleware } from "./re0-redux";
@@ -153,9 +174,13 @@ store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100
 ```
 
+---
+
 ## 第五步实现
 
 - `createStore(reducer, preloadedState, enhancer)`
+
+---
 
 ```js
 import { createStore, compose, applyMiddleware } from "./re0-redux";
@@ -186,6 +211,9 @@ const store = createStore(reducer, 100, finalEnhancer);
 store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100
 ```
+---
+
+# 感谢
 
 源码：https://github.com/daqi/re0-redux  
 redux源码：https://github.com/reduxjs/redux/tree/9c8e440964
