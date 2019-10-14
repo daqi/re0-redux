@@ -4,10 +4,13 @@ marp: true
 
 
 # 从零开始实现 redux
+大齐
 
 ---
 
 ## 零 · 开发环境搭建
+
+---
 
 ```
 mkdir re0-redux
@@ -98,6 +101,7 @@ store.dispatch({ type: "INCREMENT" }); // 101
 store.dispatch({ type: "DECREMENT" }); // 100
 
 store.replaceReducer(nextReducer);
+
 store.dispatch({ type: "INCREMENT" }); // 200
 store.dispatch({ type: "DECREMENT" }); // 100
 ```
