@@ -1,5 +1,18 @@
 # 从零开始实现 redux
 
+## 零 · 开发环境搭建
+
+```
+mkdir re0-redux
+cd re0-redux
+yarn init
+yarn add -D webpack webpack-cli
+mkdir src
+echo 'console.log("init");' > ./src/index.js
+code .
+webpack && node ./dist/main
+```
+
 ## 第一步实现
 
 - `createStore(reducer)`
